@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import Aboutme from "~/components/sections/aboutme.vue";
 import Banner from "~/components/sections/banner.vue";
 import Certificate from "~/components/sections/certificate.vue";
 import Contact from "~/components/sections/contact.vue";
 import Experience from "~/components/sections/experience.vue";
 import Skill from "~/components/sections/skill.vue";
-import Project from "~/components/sections/project.vue";
-import { useScrollReveal } from "~/composables/useScrollReveal";
 
 const skills = [
   "HTML5",
@@ -24,91 +21,39 @@ const skills = [
   "SQLServer",
   "Figma",
 ];
-
-// Initialize scroll reveal
-const { initReveal } = useScrollReveal();
-
-onMounted(() => {
-  // Re-init reveal after components are mounted
-  setTimeout(() => {
-    initReveal();
-  }, 100);
-});
 </script>
 
 <template>
   <div
-    class="relative min-h-screen overflow-hidden"
-    style="
-      background: linear-gradient(
-        180deg,
-        rgb(10, 14, 13) 0%,
-        rgb(19, 24, 22) 100%
-      );
-    "
+    class="relative min-h-screen px-2 sm:px-4 md:px-6 items-center justify-center overflow-hidden transition-colors duration-500 bg-gradient-to-br from-slate-50 via-blue-50 to-white dark:from-slate-950 dark:via-purple-950 dark:to-slate-900"
   >
-    <!-- Background effects -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <!-- Keep your existing galaxy background effect for dark mode -->
+    <!-- grid layout design pattern -->
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-[size:4rem_4rem]"
+    ></div>
+
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="hidden dark:block absolute inset-0 z-0">
         <div class="main"></div>
       </div>
 
-      <!-- Grid pattern with sage green tint -->
       <div
-        class="absolute inset-0 bg-[size:4rem_4rem] opacity-20"
-        style="
-          background-image: linear-gradient(
-              to right,
-              rgba(139, 157, 131, 0.12) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              to bottom,
-              rgba(139, 157, 131, 0.12) 1px,
-              transparent 1px
-            );
-        "
-      ></div>
-
-      <!-- Radial gradients with sage green -->
-      <div
-        class="absolute top-1/4 left-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 rounded-full blur-3xl animate-pulse opacity-20"
-        style="
-          background: radial-gradient(
-            circle,
-            rgba(139, 157, 131, 0.3) 0%,
-            transparent 70%
-          );
-        "
+        class="absolute inset-0 bg-[size:4rem_4rem] opacity-30 bg-[linear-gradient(to_right,#94a3b812_1px,transparent_1px),linear-gradient(to_bottom,#94a3b812_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)]"
       ></div>
 
       <div
-        class="absolute bottom-1/4 right-0 w-96 h-96 rounded-full blur-3xl animate-pulse delay-700 opacity-15"
-        style="
-          background: radial-gradient(
-            circle,
-            rgba(164, 184, 157, 0.25) 0%,
-            transparent 70%
-          );
-          animation-delay: 1s;
-        "
+        class="absolute top-1/4 left-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 rounded-full blur-3xl animate-pulse transition-colors duration-500 bg-sky-300/30 dark:bg-purple-500/30"
       ></div>
 
       <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl animate-pulse delay-1000 opacity-10"
-        style="
-          background: radial-gradient(
-            circle,
-            rgba(122, 138, 114, 0.2) 0%,
-            transparent 70%
-          );
-          animation-delay: 1.5s;
-        "
+        class="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full blur-3xl animate-pulse delay-700 transition-colors duration-500 bg-teal-300/20 dark:bg-pink-500/30"
+      ></div>
+
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl animate-pulse delay-1000 transition-colors duration-500 bg-blue-200/20 dark:bg-indigo-500/20"
       ></div>
     </div>
 
-    <!-- Main Content -->
     <div class="relative z-10">
       <Banner profiles="/images/profileAi(1).png" />
 
@@ -119,12 +64,11 @@ onMounted(() => {
       />
 
       <section
-        class="w-full mx-auto flex flex-col items-center justify-center text-center"
+        class="w-full mx-auto flex flex-col items-center justify-center text-center lg:px-8"
       >
         <Skill />
         <Experience />
         <Certificate />
-        <Project />
         <Contact />
       </section>
     </div>
@@ -132,7 +76,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Galaxy background CSS - Kept for dark mode effect */
+/* Galaxy background CSS - Kept exactly as provided */
 .main {
   position: fixed;
   top: 50%;

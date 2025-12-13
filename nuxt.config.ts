@@ -66,6 +66,11 @@ export default defineNuxtConfig({
       {
         rel: "apple-touch-icon",
         href: "images/me-banner.png"
+      },
+      // Google Fonts for new design
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
       }
     ]
     },

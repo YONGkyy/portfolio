@@ -1,193 +1,192 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
-  const colorMode = useColorMode();
-  const isDarkMode = computed(() => colorMode.value === "dark");
+import { ref } from "vue";
+
+// Sample project data
+const projects = [
+  {
+    title: "E-Commerce Platform",
+    description:
+      "A modern e-commerce solution with real-time inventory management, secure payment processing, and an intuitive admin dashboard.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
+    tags: ["Vue.js", "Laravel", "MySQL", "Stripe"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: "Task Management App",
+    description:
+      "Collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features.",
+    image:
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=500&fit=crop",
+    tags: ["Vue.js", "Nuxt.js", "PostgreSQL", "WebSockets"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: "Analytics Dashboard",
+    description:
+      "Data visualization dashboard with interactive charts, real-time metrics, and customizable reporting features.",
+    image:
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop",
+    tags: ["TypeScript", "Next.js", "D3.js", "Tailwind"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: "Social Media Platform",
+    description:
+      "Full-featured social networking platform with posts, comments, real-time chat, and user authentication.",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop",
+    tags: ["React", "Firebase", "Redux", "Socket.io"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: "Portfolio CMS",
+    description:
+      "Headless CMS for portfolio websites with a modern admin interface, API-first architecture, and flexible content modeling.",
+    image:
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=500&fit=crop",
+    tags: ["Strapi", "GraphQL", "Next.js", "Docker"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: "Mobile App Landing",
+    description:
+      "Beautiful, conversion-optimized landing page for a mobile fitness app with smooth animations and responsive design.",
+    image:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop",
+    tags: ["HTML/CSS", "JavaScript", "GSAP", "Responsive"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+];
+
+// Mouse move for 3D tilt effect
+const handleCardMouseMove = (event: MouseEvent, card: HTMLElement) => {
+  const rect = card.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  const rotateX = (y - centerY) / 20;
+  const rotateY = (centerX - x) / 20;
+
+  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+};
+
+const handleCardMouseLeave = (card: HTMLElement) => {
+  card.style.transform =
+    "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+};
 </script>
 
 <template>
-  <section class="mb-20 w-full max-w-6xl px-2 sm:px-4 md:px-6">
-    <div
-      id="projects"
-      data-aos="fade-down"
-      class="flex items-center gap-4 mb-12 justify-center lg:justify-start"
-    >
-      <!-- Section Label -->
-      <div
-        class="h-px w-12 bg-gradient-to-r from-transparent to-purple-500"
-        :class="{ 'opacity-50': colorMode.value === 'light' }"
-      ></div>
-      <span
-        class="text-purple-400 uppercase tracking-wider text-sm md:text-lg font-semibold"
-        :class="{ 'text-blue-600': colorMode.value === 'light' }"
-      >
-        Featured Projects
-      </span>
-      <div
-        class="h-px flex-1 bg-gradient-to-r from-purple-500 to-transparent max-w-xs"
-        :class="{ 'opacity-50': colorMode.value === 'light' }"
-      ></div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-6">
-      <!-- Project Card 1: Norton University Portal -->
-      <div
-        data-aos="fade-right"
-        class="group relative bg-gradient-to-br from-purple-800/50 to-indigo-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-purple-500/20 md:hover:border-purple-400/40 transition-all duration-500 md:hover:transform md:hover:scale-105 overflow-hidden"
-      >
-        <!-- Project Image -->
-        <div class="relative mb-4 rounded-lg overflow-hidden">
-          <img
-            src="/images/pf1.jpg"
-            alt="Norton University Student Portal"
-            class="w-full h-32 sm:h-40 object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-purple-900/80 to-transparent"
-          ></div>
-        </div>
-
-        <div class="flex items-start gap-3 sm:gap-4 mb-4">
-          <div
-            class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z"
-              />
-            </svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4
-              class="text-white font-semibold text-sm sm:text-base mb-2 break-words"
-            >
-              Norton University Student Portal
-            </h4>
-            <button
-              class="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors"
-            >
-              LEARN MORE
-            </button>
-          </div>
-        </div>
+  <section id="projects" class="relative py-16 sm:py-20 md:py-24 lg:py-32">
+    <div class="container mx-auto px-4 md:px-16">
+      <!-- Section Header -->
+      <div class="text-center mb-12 sm:mb-16 md:mb-20 reveal">
+        <span
+          class="text-sm sm:text-base font-semibold uppercase tracking-wider mb-2 sm:mb-4 block"
+          style="color: var(--color-accent-primary)"
+        >
+          My recent work
+        </span>
+        <h2
+          class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white"
+        >
+          Featured Projects
+        </h2>
+        <p
+          class="text-base sm:text-lg max-w-2xl mx-auto"
+          style="color: #7a8984"
+        >
+          A selection of projects that showcase my skills and creativity
+        </p>
       </div>
 
-      <!-- Project Card 2 -->
+      <!-- Projects Grid -->
       <div
-        data-aos="fade-left"
-        class="group relative bg-gradient-to-br from-orange-800/50 to-red-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-orange-500/20 md:hover:border-orange-400/40 transition-all duration-300 md:hover:transform md:hover:scale-105"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
       >
-        <div class="flex items-start sm:items-center gap-3 sm:gap-4 mb-4">
-          <div
-            class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z"
-              />
-            </svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4
-              class="text-white font-semibold text-sm sm:text-base mb-1 break-words"
-            >
-              CIB on the Mobile
-            </h4>
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-              Take your client onboard seamlessly by our amazing tool of digital
-              onboard process.
-            </p>
-          </div>
-        </div>
-        <button
-          class="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors"
+        <div
+          v-for="(project, index) in projects"
+          :key="project.title"
+          class="project-card reveal"
+          :style="{ animationDelay: `${index * 100}ms` }"
+          @mousemove="(e) => handleCardMouseMove(e, $event.currentTarget as HTMLElement)"
+          @mouseleave="(e) => handleCardMouseLeave($event.currentTarget as HTMLElement)"
         >
-          LEARN MORE
-        </button>
-      </div>
+          <!-- Project Image -->
+          <div class="overflow-hidden">
+            <img
+              :src="project.image"
+              :alt="project.title"
+              class="w-full h-48 sm:h-56 object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
 
-      <!-- Project Card 3 -->
-      <div
-        data-aos="fade-right"
-        class="group relative bg-gradient-to-br from-blue-800/50 to-purple-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-500/20 md:hover:border-blue-400/40 transition-all duration-300 md:hover:transform md:hover:scale-105"
-      >
-        <div class="flex items-start sm:items-center gap-3 sm:gap-4 mb-4">
-          <div
-            class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M9.5 3A6.5 6.5 0 0 1 16 9.5C16 11.11 15.41 12.59 14.44 13.73L14.71 14H15.5L20.5 19L19 20.5L14 15.5V14.71L13.73 14.44C12.59 15.41 11.11 16 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3M9.5 5C7 5 5 7 5 9.5S7 14 9.5 14S14 12 14 9.5S12 5 9.5 5Z"
-              />
-            </svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4
-              class="text-white font-semibold text-sm sm:text-base mb-1 break-words"
-            >
-              CIB on the Mobile
-            </h4>
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-              Take your client onboard seamlessly by our amazing tool of digital
-              onboard process.
+          <!-- Project Content -->
+          <div class="p-6">
+            <h3 class="text-xl sm:text-2xl font-semibold mb-3 text-white">
+              {{ project.title }}
+            </h3>
+            <p class="text-sm sm:text-base mb-4" style="color: #7a8984">
+              {{ project.description }}
             </p>
-          </div>
-        </div>
-        <button
-          class="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
-        >
-          LEARN MORE
-        </button>
-      </div>
 
-      <!-- Project Card 4 -->
-      <div
-        data-aos="fade-left"
-        class="group relative bg-gradient-to-br from-violet-800/50 to-pink-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-violet-500/20 md:hover:border-violet-400/40 transition-all duration-300 md:hover:transform md:hover:scale-105"
-      >
-        <div class="flex items-start sm:items-center gap-3 sm:gap-4 mb-4">
-          <div
-            class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 to-pink-500 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"
-              />
-            </svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4
-              class="text-white font-semibold text-sm sm:text-base mb-1 break-words"
-            >
-              CIB on the Mobile
-            </h4>
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-              Take your client onboard seamlessly by our amazing tool of digital
-              onboard process.
-            </p>
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                v-for="tag in project.tags"
+                :key="tag"
+                class="text-xs px-3 py-1 rounded-md border"
+                style="
+                  background: rgba(139, 157, 131, 0.15);
+                  color: var(--color-accent-light);
+                  border-color: rgba(139, 157, 131, 0.2);
+                "
+              >
+                {{ tag }}
+              </span>
+            </div>
+
+            <!-- Links -->
+            <div class="flex gap-4">
+              <a
+                :href="project.liveUrl"
+                class="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:translate-x-1"
+                style="color: var(--color-accent-primary)"
+              >
+                View Live <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a
+                :href="project.githubUrl"
+                class="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:translate-x-1"
+                style="color: var(--color-accent-primary)"
+              >
+                GitHub <i class="fab fa-github"></i>
+              </a>
+            </div>
           </div>
         </div>
-        <button
-          class="text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors"
-        >
-          LEARN MORE
-        </button>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+.project-card {
+  transition: transform 0.5s ease;
+}
+</style>
