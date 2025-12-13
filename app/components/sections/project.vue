@@ -4,62 +4,22 @@ import { ref } from "vue";
 // Sample project data
 const projects = [
   {
-    title: "E-Commerce Platform",
+    title: "Inventory & Stock Management System",
     description:
-      "A modern e-commerce solution with real-time inventory management, secure payment processing, and an intuitive admin dashboard.",
+      "A web-based stock management system with product categories, brands, stock in/out history, borrowing and returning workflow, and printable reports.",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
-    tags: ["Vue.js", "Laravel", "MySQL", "Stripe"],
+      "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=800&h=500&fit=crop",
+    tags: ["Laravel", "Vue 3", "MySQL", "Tailwind CSS"],
     liveUrl: "#",
     githubUrl: "#",
   },
   {
-    title: "Task Management App",
+    title: "Laboratory Room & Equipment Management",
     description:
-      "Collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      "System for managing laboratory rooms, projectors, and room checks with issue tracking for HDMI, VGA, and equipment condition.",
     image:
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=500&fit=crop",
-    tags: ["Vue.js", "Nuxt.js", "PostgreSQL", "WebSockets"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Analytics Dashboard",
-    description:
-      "Data visualization dashboard with interactive charts, real-time metrics, and customizable reporting features.",
-    image:
-      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop",
-    tags: ["TypeScript", "Next.js", "D3.js", "Tailwind"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Social Media Platform",
-    description:
-      "Full-featured social networking platform with posts, comments, real-time chat, and user authentication.",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop",
-    tags: ["React", "Firebase", "Redux", "Socket.io"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Portfolio CMS",
-    description:
-      "Headless CMS for portfolio websites with a modern admin interface, API-first architecture, and flexible content modeling.",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=500&fit=crop",
-    tags: ["Strapi", "GraphQL", "Next.js", "Docker"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Mobile App Landing",
-    description:
-      "Beautiful, conversion-optimized landing page for a mobile fitness app with smooth animations and responsive design.",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop",
-    tags: ["HTML/CSS", "JavaScript", "GSAP", "Responsive"],
+      "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=800&h=500&fit=crop",
+    tags: ["Laravel", "Vue 3", "SQL Server", "Inertia.js"],
     liveUrl: "#",
     githubUrl: "#",
   },
