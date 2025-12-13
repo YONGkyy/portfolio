@@ -9,22 +9,6 @@ import Skill from "~/components/sections/skill.vue";
 import Project from "~/components/sections/project.vue";
 import { useScrollReveal } from "~/composables/useScrollReveal";
 
-const skills = [
-  "HTML5",
-  "CSS3",
-  "JavaScript",
-  "Vue.js",
-  "Nuxt.js",
-  "Tailwind CSS",
-  "TypeScript",
-  "Git",
-  "PHP",
-  "Laravel",
-  "MySQL",
-  "SQLServer",
-  "Figma",
-];
-
 // Initialize scroll reveal
 const { initReveal } = useScrollReveal();
 
@@ -53,23 +37,6 @@ onMounted(() => {
       <div class="hidden dark:block absolute inset-0 z-0">
         <div class="main"></div>
       </div>
-
-      <!-- Grid pattern with sage green tint -->
-      <div
-        class="absolute inset-0 bg-[size:4rem_4rem] opacity-20"
-        style="
-          background-image: linear-gradient(
-              to right,
-              rgba(139, 157, 131, 0.12) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              to bottom,
-              rgba(139, 157, 131, 0.12) 1px,
-              transparent 1px
-            );
-        "
-      ></div>
 
       <!-- Radial gradients with sage green -->
       <div
@@ -112,21 +79,13 @@ onMounted(() => {
     <div class="relative z-10">
       <Banner profiles="/images/profileAi(1).png" />
 
-      <Aboutme
-        profile-image="/images/sadness.png"
-        :skills="skills"
-        :stats="{ experience: 2 }"
-      />
+      <Aboutme profile-image="/images/sadness.png" />
 
-      <section
-        class="w-full mx-auto flex flex-col items-center justify-center text-center"
-      >
-        <Skill />
-        <Experience />
-        <Certificate />
-        <Project />
-        <Contact />
-      </section>
+      <Skill />
+      <Experience />
+      <Certificate />
+      <Project />
+      <Contact />
     </div>
   </div>
 </template>

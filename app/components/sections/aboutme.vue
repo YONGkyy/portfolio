@@ -57,11 +57,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section
-    id="aboutme"
-    class="relative py-16 sm:py-20 md:py-24 lg:py-32"
-    style="background: rgb(19, 24, 22)"
-  >
+  <section id="aboutme" class="relative py-16 sm:py-20 md:py-24 lg:py-32">
     <div class="container mx-auto px-4 md:px-16">
       <!-- Section Header -->
       <div class="text-center mb-12 sm:mb-16 md:mb-20 reveal">
