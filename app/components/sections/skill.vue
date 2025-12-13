@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-// Skills data organized by category
+// Skills data organized by category (based on real experience)
 const skillCategories = [
   {
     title: "Frontend",
@@ -12,49 +12,49 @@ const skillCategories = [
       "JavaScript",
       "TypeScript",
       "Vue.js",
+      "Vue 3",
       "Nuxt.js",
-      "React",
-      "Next.js",
       "Tailwind CSS",
-      "Sass/SCSS",
+      "DaisyUI",
       "Responsive Design",
-      "Animation",
+      "UI Components",
     ],
   },
   {
     title: "Backend",
     icon: "fas fa-server",
     skills: [
-      "Node.js",
-      "Express",
-      "Laravel",
       "PHP",
-      "Python",
+      "Laravel",
       "RESTful APIs",
-      "GraphQL",
-      "MongoDB",
-      "PostgreSQL",
+      "Authentication & Authorization",
       "MySQL",
-      "Redis",
-      "WebSockets",
+      "Microsoft SQL Server",
+      "CRUD Operations",
     ],
   },
+  // {
+  //   title: "Mobile Development",
+  //   icon: "fas fa-mobile-alt",
+  //   skills: [
+  //     "Flutter",
+  //     "Dart",
+  //     "Navigation & Routing",
+  //     "Localization (i18n)",
+  //     "UI Cloning",
+  //   ],
+  // },
   {
-    title: "Tools & DevOps",
+    title: "Tools & Others",
     icon: "fas fa-tools",
     skills: [
       "Git",
       "GitHub",
-      "Docker",
-      "CI/CD",
-      "AWS",
-      "Vercel",
-      "Webpack",
+      "Linux",
       "Vite",
-      "ESLint",
-      "Jest",
-      "Figma",
-      "Agile/Scrum",
+      "Figma (UI Design)",
+      "Xampp",
+      "Herd",
     ],
   },
 ];
