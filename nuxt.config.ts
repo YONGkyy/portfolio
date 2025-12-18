@@ -39,7 +39,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Yong @ let talk about it",
+      title: "Yong @ Portfolio",
       meta: [
         { charset: "utf-8" },
         {
