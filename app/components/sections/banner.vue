@@ -192,7 +192,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Social Links -->
-        <div class="flex flex-wrap items-center gap-4 mt-6">
+        <div class="flex flex-wrap items-center gap-2 mb-6 md:mb-0 md:gap-4 mt-6">
           <span class="text-sm sm:text-base text-white"
             >Connect with me on:</span
           >
@@ -203,7 +203,7 @@ onUnmounted(() => {
             target="_blank"
             rel="noopener noreferrer"
             :aria-label="social.label"
-            class="w-10 h-10 flex items-center justify-center rounded-full glass text-gray-400 hover:bg-[var(--color-accent-primary)] hover:text-black transition-all duration-300"
+            class="w-10 md:w-15 h-10 md:h-15 flex items-center justify-center rounded-full glass text-gray-400 hover:bg-[var(--color-accent-primary)] hover:text-black transition-all duration-300"
           >
             <i :class="social.icon" class="text-lg"></i>
           </a>
@@ -229,7 +229,7 @@ onUnmounted(() => {
 
     <!-- Scroll Indicator -->
     <div
-      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+      class="absolute bottom-0 md:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
     >
       <div
         class="w-6 h-10 border-2 rounded-full flex items-start justify-center p-2"
