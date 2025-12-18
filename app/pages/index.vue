@@ -85,7 +85,7 @@ onMounted(() => {
       <Experience />
       <Certificate />
       <Project />
-      <Contact />
+      <!-- <Contact /> -->
     </div>
   </div>
 </template>

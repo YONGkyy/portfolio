@@ -36,7 +36,7 @@ const handleScroll = () => {
     "experience",
     "certificates",
     "projects",
-    "contact",
+    // "contact",
   ];
   const scrollPos = window.scrollY + 150; // Offset for better accuracy
 
@@ -96,7 +96,7 @@ onUnmounted(() => {
             'experience',
             'certificates',
             'projects',
-            'contact',
+            // 'contact',
           ]"
           :key="section"
           @click="smoothScrollTo(section)"
@@ -199,7 +199,7 @@ onUnmounted(() => {
             'experience',
             'certificates',
             'projects',
-            'contact',
+            // 'contact',
           ]"
           :key="section"
           @click="smoothScrollTo(section)"

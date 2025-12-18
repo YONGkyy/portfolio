@@ -4,25 +4,15 @@ import { ref } from "vue";
 // Sample project data
 const projects = [
   {
-    title: "Inventory & Stock Management System",
+    title: "Online Management System for Materials and Technical Equipment in the Computer Lab",
     description:
-      "A web-based stock management system with product categories, brands, stock in/out history, borrowing and returning workflow, and printable reports.",
-    image:
-      "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=800&h=500&fit=crop",
-    tags: ["Laravel", "Vue 3", "MySQL", "Tailwind CSS"],
-    liveUrl: "#",
+      "A web-based stock management system with product categories, brands, stock in/out history, borrowing and returning workflow, computer laboratory equipment management ,user authentication and authorization.",
+    image: "projects/lab.png",
+    tags: ["Laravel", "Inertia.js", "Spatie Laravel Permissions", "Vue 3", "MySQL", "Tailwind CSS","DaisyUI"],
+     liveUrl: "#",
     githubUrl: "#",
   },
-  {
-    title: "Laboratory Room & Equipment Management",
-    description:
-      "System for managing laboratory rooms, projectors, and room checks with issue tracking for HDMI, VGA, and equipment condition.",
-    image:
-      "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=800&h=500&fit=crop",
-    tags: ["Laravel", "Vue 3", "SQL Server", "Inertia.js"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
+
 ];
 
 // Mouse move for 3D tilt effect
@@ -123,7 +113,7 @@ const handleCardMouseLeave = (card: HTMLElement) => {
                 class="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:translate-x-1"
                 style="color: var(--color-accent-primary)"
               >
-                View Live <i class="fas fa-external-link-alt"></i>
+                Project Featured <i class="fas fa-external-link-alt"></i>
               </a>
               <a
                 :href="project.githubUrl"

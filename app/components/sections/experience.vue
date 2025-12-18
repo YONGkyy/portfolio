@@ -4,18 +4,16 @@ const experiences = [
   {
     title: "Web Developer",
     company: "Norton University",
-    period: "2023 - Present",
-    duration: "2 Years",
+    period: "2023 – Present",
+    duration: "1+ years", // ADDED: This was missing
     location: "Phnom Penh, Cambodia",
     description:
-      "Designed and developed modern, responsive web applications for academic and administrative purposes, serving thousands of students and faculty members.",
-    achievements: [
-      "Student Management System",
-      "Course Registration Portal",
-      "Academic Records System",
-      "Faculty Dashboard",
+      "Developed and maintained an Online Management System for Materials and Technical Equipment in the Computer Lab, and provided technical support for ICT service office users.",
+    achievements: [ // FIXED: Was "projects" but template uses "achievements"
+      "Online Management System for Computer Lab Equipment",
+      "User Support and System Maintenance",
     ],
-    technologies: ["HTML5", "CSS3", "Vue.js", "TypeScript", "Laravel", "MySQL"],
+    technologies: ["Laravel", "SQLServer", "Vue 3", "TypeScript", "InertailJS", "Tailwind CSS"],
   },
 ];
 </script>
@@ -184,5 +182,21 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading);
+}
+
+/* Skill Tag Styling */
+.skill-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background: rgba(139, 157, 131, 0.15);
+  color: var(--color-accent-light);
+  border: 1px solid rgba(139, 157, 131, 0.3);
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(139, 157, 131, 0.25);
+  transform: translateY(-2px);
 }
 </style>
