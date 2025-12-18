@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed, watch } from "vue";
+import {
+  useTypingAnimation,
+  useRoleCycling,
+} from "@/composables/useTypingAnimation"; // adjust path
 
 interface Banner {
   name: string;
@@ -10,7 +14,7 @@ interface Banner {
 }
 
 // ================================
-// Banners Data (add more if needed)
+// Banner Data
 // ================================
 const banners: Banner[] = [
   {
@@ -23,14 +27,6 @@ const banners: Banner[] = [
       { label: "View My Work", target: "projects", icon: "fas fa-arrow-down" },
     ],
   },
-  // Example for a second banner (optional)
-  // {
-  //   name: "Another Banner",
-  //   role: "UI/UX Designer",
-  //   description: "Another description here...",
-  //   profileImage: "/images/another.png",
-  //   buttons: [{ label: "Learn More", target: "about", icon: "fas fa-info" }]
-  // }
 ];
 
 // ================================
@@ -84,14 +80,55 @@ const smoothScrollTo = (sectionId: string) => {
 };
 
 // ================================
+// Typing Animation
+// ================================
+// Name types once
+const {
+  displayText: typedName,
+  isComplete: nameComplete,
+  type: startNameTyping,
+} = useTypingAnimation(activeBanner.value.name);
+
+// Role cycles after name finishes
+const {
+  currentRole,
+  start: startRoleTyping,
+  stop: stopRoleTyping,
+} = useRoleCycling(["Web Developer", "UI/UX Enthusiast"]);
+
+// Start role typing only after name finishes
+watch(nameComplete, (val) => {
+  if (val) {
+    startRoleTyping();
+  }
+});
+
+// ================================
 // Lifecycle
 // ================================
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  startNameTyping(); // start typing name
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  stopRoleTyping(); // stop role cycling
+});
+
+// ================================
+// check if typing compklete it hides cursor
+// ================================
+const showNameCursor = ref(true);
+
+watch(nameComplete, (val) => {
+  if (val) {
+    // Name typing complete → hide cursor
+    showNameCursor.value = false;
+
+    // Start role typing
+    startRoleTyping();
+  }
 });
 </script>
 
@@ -151,13 +188,25 @@ onUnmounted(() => {
           Welcome to my portfolio
         </span>
 
+        <!-- Name with typing -->
         <h1
           class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 leading-tight"
         >
           <span class="text-[var(--color-text-primary-dark)]">Hi, I'm</span
           ><br />
-          <span class="text-gradient-sage">{{ activeBanner.name }}</span>
+          <span class="text-gradient-sage">
+            {{ typedName
+            }}<span v-if="showNameCursor" class="blinking-cursor">|</span>
+          </span>
         </h1>
+
+        <!-- Role with typing effect -->
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6"
+          style="color: var(--color-accent-primary)"
+        >
+          {{ currentRole }}<span class="blinking-cursor">|</span>
+        </h2>
 
         <p
           class="text-base sm:text-lg md:text-xl max-w-2xl mb-6 leading-relaxed text-[var(--color-text-secondary-dark)]"
@@ -192,7 +241,9 @@ onUnmounted(() => {
         </div>
 
         <!-- Social Links -->
-        <div class="flex flex-wrap items-center gap-2 mb-6 md:mb-0 md:gap-4 mt-6">
+        <div
+          class="flex flex-wrap items-center gap-2 mb-6 md:mb-0 md:gap-4 mt-6"
+        >
           <span class="text-sm sm:text-base text-white"
             >Connect with me on:</span
           >
@@ -273,7 +324,6 @@ h1 {
   background: var(--color-accent-light);
   transform: translateY(-2px);
 }
-
 .btn-sage-outline {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -323,6 +373,26 @@ h1 {
     0 10%
   );
   z-index: 1;
+}
+
+/* Blinking Cursor */
+.blinking-cursor {
+  display: inline-block;
+  width: 1px;
+  background-color: var(--color-accent-primary);
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
 }
 
 /* Keyframes */
