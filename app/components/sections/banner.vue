@@ -1,18 +1,77 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 
-// Props
-defineProps<{
-  profiles?: string;
-}>();
+interface Banner {
+  name: string;
+  role: string;
+  description: string;
+  profileImage: string;
+  buttons: { label: string; target: string; icon: string; outline?: boolean }[];
+}
 
-// Parallax effect
+// ================================
+// Banners Data (add more if needed)
+// ================================
+const banners: Banner[] = [
+  {
+    name: "Keo Yinyong",
+    role: "Full-stack Developer",
+    description:
+      "Passionate developer creating meaningful digital experiences that balance user needs and business goals.",
+    profileImage: "/images/profileV1.png",
+    buttons: [
+      { label: "View My Work", target: "projects", icon: "fas fa-arrow-down" },
+    ],
+  },
+  // Example for a second banner (optional)
+  // {
+  //   name: "Another Banner",
+  //   role: "UI/UX Designer",
+  //   description: "Another description here...",
+  //   profileImage: "/images/another.png",
+  //   buttons: [{ label: "Learn More", target: "about", icon: "fas fa-info" }]
+  // }
+];
+
+// ================================
+// Social Links
+// ================================
+const socialLinks = [
+  { icon: "fab fa-github", url: "https://github.com/YONGKyy", label: "GitHub" },
+  {
+    icon: "fab fa-linkedin-in",
+    url: "https://www.linkedin.com/in/keo-yinyong-396277330/",
+    label: "LinkedIn",
+  },
+  {
+    icon: "fab fa-facebook-f",
+    url: "https://www.facebook.com/hea.yong.24",
+    label: "Facebook",
+  },
+  {
+    icon: "fab fa-telegram-plane",
+    url: "https://t.me/yong_24",
+    label: "Telegram",
+  },
+];
+
+// ================================
+// Banner State
+// ================================
+const activeBannerIndex = ref(0);
+const activeBanner = computed(() => banners[activeBannerIndex.value]);
+
+// ================================
+// Parallax Scroll
+// ================================
 const parallaxOffset = ref(0);
-
 const handleScroll = () => {
   parallaxOffset.value = window.scrollY * 0.4;
 };
 
+// ================================
+// Smooth Scroll
+// ================================
 const smoothScrollTo = (sectionId: string) => {
   const element = document.getElementById(sectionId);
   if (element) {
@@ -24,6 +83,9 @@ const smoothScrollTo = (sectionId: string) => {
   }
 };
 
+// ================================
+// Lifecycle
+// ================================
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
@@ -38,13 +100,13 @@ onUnmounted(() => {
     id="banner"
     class="relative min-h-screen flex items-center overflow-hidden"
     style="
-      /* Using a CSS variable for dark background if defined, otherwise keep gradient */
       background: var(
         --color-background-dark,
         linear-gradient(180deg, rgb(10, 14, 13) 0%, rgb(19, 24, 22) 100%)
       );
     "
   >
+    <!-- Background Shapes -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
       <div
         class="absolute top-1/4 left-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 rounded-full blur-3xl animate-pulse opacity-20"
@@ -70,14 +132,16 @@ onUnmounted(() => {
       ></div>
     </div>
 
+    <!-- Content -->
     <div
       class="container mx-auto px-4 md:px-16 relative z-10 flex flex-col lg:flex-row items-center justify-between"
     >
+      <!-- Left Text -->
       <div
-        class="hero-content animate-fade-in-up w-full lg:w-1/2 pt-24 lg:pt-0"
+        class="hero-content animate-fade-in-up w-full lg:w-1/2 lg:pt-0"
         :style="{
           transform: `translateY(${parallaxOffset}px)`,
-          opacity: 1 - parallaxOffset / 500,
+          opacity: Math.max(0, 1 - parallaxOffset / 500),
         }"
       >
         <span
@@ -92,47 +156,70 @@ onUnmounted(() => {
         >
           <span class="text-[var(--color-text-primary-dark)]">Hi, I'm</span
           ><br />
-          <span class="text-gradient-sage">Keo Yinyong</span>
+          <span class="text-gradient-sage">{{ activeBanner.name }}</span>
         </h1>
 
-        <div class="accent-line mb-6 sm:mb-8"></div>
-
         <p
-          class="text-base sm:text-lg md:text-xl max-w-2xl mb-8 sm:mb-12 leading-relaxed text-[var(--color-text-secondary-dark)]"
+          class="text-base sm:text-lg md:text-xl max-w-2xl mb-6 leading-relaxed text-[var(--color-text-secondary-dark)]"
         >
-          Self-taught UI/UX designer and full-stack developer with 2+ years of
-          experience crafting meaningful and delightful digital products.
-          Passionate about creating seamless user experiences that perfectly
-          balance user needs with business objectives.
+          {{ activeBanner.description }}
         </p>
 
+        <!-- PROFILE IMAGE (on mobile only) -->
+        <div class="w-56 h-56 md:hidden mx-auto mb-6 relative">
+          <img
+            :src="activeBanner.profileImage"
+            :alt="`Profile of ${activeBanner.name}`"
+            class="w-full h-full object-cover absolute z-10 rounded-full"
+          />
+          <div class="absolute inset-0 squircle-static"></div>
+        </div>
+
+        <!-- Buttons -->
         <div class="flex flex-col sm:flex-row gap-4">
           <button
-            @click="smoothScrollTo('projects')"
-            class="btn-sage inline-flex items-center justify-center gap-2"
+            v-for="btn in activeBanner.buttons"
+            :key="btn.label"
+            @click="smoothScrollTo(btn.target)"
+            :class="[
+              btn.outline ? 'btn-sage-outline' : 'btn-sage',
+              'inline-flex items-center justify-center gap-2',
+            ]"
           >
-            <span>View My Work</span>
-            <i class="fas fa-arrow-down"></i>
+            <span>{{ btn.label }}</span>
+            <i :class="btn.icon"></i>
           </button>
-          <button
-            @click="smoothScrollTo('contact')"
-            class="btn-sage-outline text-[var(--color-text-primary-dark)] inline-flex items-center justify-center gap-2"
+        </div>
+
+        <!-- Social Links -->
+        <div class="flex flex-wrap items-center gap-4 mt-6">
+          <span class="text-sm sm:text-base text-white"
+            >Connect with me on:</span
           >
-            <span>Get In Touch</span>
-            <i class="fas fa-envelope"></i>
-          </button>
+          <a
+            v-for="social in socialLinks"
+            :key="social.label"
+            :href="social.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="social.label"
+            class="w-10 h-10 flex items-center justify-center rounded-full glass text-gray-400 hover:bg-[var(--color-accent-primary)] hover:text-black transition-all duration-300"
+          >
+            <i :class="social.icon" class="text-lg"></i>
+          </a>
         </div>
       </div>
 
+      <!-- Right Profile Image (desktop only) -->
       <div
-        class="w-full lg:w-1/2 flex justify-center items-center mt-12 lg:mt-0"
+        class="hidden lg:flex w-full lg:w-1/2 justify-center items-center mt-12 lg:mt-0"
       >
         <div
           class="w-80 h-80 lg:w-[500px] lg:h-[500px] relative reveal profile-image-wrapper"
         >
           <img
-            :src="profiles"
-            alt="Profile Picture of Keo Yinyong"
+            :src="activeBanner.profileImage"
+            :alt="`Profile of ${activeBanner.name}`"
             class="w-full h-full object-cover absolute z-10 rounded-full"
           />
           <div class="absolute inset-0 squircle-static"></div>
@@ -140,6 +227,7 @@ onUnmounted(() => {
       </div>
     </div>
 
+    <!-- Scroll Indicator -->
     <div
       class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
     >
@@ -157,68 +245,27 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Custom Keyframe for subtle pulsation */
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.5;
-  }
-}
-
-/* Styles for the Animated Ring */
-.profile-ring-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--color-accent-primary);
-  border-radius: 9999px;
-  animation: pulse-ring 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  z-index: 0;
-  filter: blur(20px);
-}
-
-/* Ensure heading font */
 h1 {
   font-family: var(--font-heading);
 }
 
-/* 1. Sage Green Gradient for Title */
+/* Gradient Text */
 .text-gradient-sage {
   background: linear-gradient(
     90deg,
     var(--color-accent-primary),
-    /* Soft Sage Green */ var(--color-accent-light) /* Slightly Lighter Green */
+    var(--color-accent-light)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
 }
 
-/* 2. Primary Accent Line */
-.accent-line {
-  width: 60px;
-  height: 4px;
-  background: var(--color-accent-primary);
-  border-radius: 2px;
-}
-
-/* 3. Primary Button (Solid Sage) */
+/* Buttons */
 .btn-sage {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  color: #000; /* Text is dark on light green button */
+  color: #000;
   background: var(--color-accent-primary);
   transition: all 0.3s ease;
 }
@@ -227,7 +274,6 @@ h1 {
   transform: translateY(-2px);
 }
 
-/* 4. Outline Button (Sage Outline) */
 .btn-sage-outline {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -237,25 +283,49 @@ h1 {
 }
 .btn-sage-outline:hover {
   background: var(--color-accent-primary);
-  color: #000 !important; /* Text becomes dark on hover */
+  color: #000 !important;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  /* On smaller screens (lg breakpoint and down), center content */
-  .hero-content {
-    text-align: center;
-  }
-  .flex.flex-col.sm\:flex-row.gap-4 {
-    justify-content: center;
-  }
-  .accent-line {
-    margin-left: auto;
-    margin-right: auto;
-  }
+/* Profile Image Wrapper */
+.profile-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-image-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 4px solid var(--color-accent-primary);
+  clip-path: polygon(
+    10% 0,
+    90% 0,
+    100% 10%,
+    100% 90%,
+    90% 100%,
+    10% 100%,
+    0 90%,
+    0 10%
+  );
+  animation: vector-spin 30s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+.squircle-static {
+  clip-path: polygon(
+    10% 0,
+    90% 0,
+    100% 10%,
+    100% 90%,
+    90% 100%,
+    10% 100%,
+    0 90%,
+    0 10%
+  );
+  z-index: 1;
 }
 
-/* KEYFRAME for a subtle rotating frame animation */
+/* Keyframes */
 @keyframes vector-spin {
   from {
     transform: rotate(0deg);
@@ -263,57 +333,5 @@ h1 {
   to {
     transform: rotate(360deg);
   }
-}
-
-/* ----- UPDATED CSS FOR PROFILE IMAGE ----- */
-
-/* 1. The container wrapper */
-.profile-image-wrapper {
-  /* Flex centering to align image and border */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 2. The Rotating Border (created using a pseudo-element) */
-.profile-image-wrapper::before {
-  content: "";
-  position: absolute;
-  /* Inset -4px to make it slightly larger than the image container, 
-     accommodating the 4px border width so it's visible outside */
-  inset: -4px;
-  border: 4px solid var(--color-accent-primary);
-  /* The complex path shape */
-  clip-path: polygon(
-    10% 0,
-    90% 0,
-    100% 10%,
-    100% 90%,
-    90% 100%,
-    10% 100%,
-    0 90%,
-    0 10%
-  );
-  /* Apply the spin animation ONLY to this border element */
-  animation: vector-spin 30s linear infinite;
-  z-index: 0; /* Ensure it sits behind the image */
-  pointer-events: none; /* Prevents it from interfering with clicks */
-}
-
-/* 3. The Static Image Content */
-.squircle-static-content {
-  /* Apply the SAME clip-path to the image itself so it matches the shape */
-  clip-path: polygon(
-    10% 0,
-    90% 0,
-    100% 10%,
-    100% 90%,
-    90% 100%,
-    10% 100%,
-    0 90%,
-    0 10%
-  );
-  z-index: 1; /* Ensure image sits on top of the border */
-  /* No animation here, so it remains stationary */
 }
 </style>

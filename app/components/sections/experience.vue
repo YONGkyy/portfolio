@@ -7,13 +7,16 @@ const experiences = [
     period: "2023 – Present",
     duration: "1+ years", // ADDED: This was missing
     location: "Phnom Penh, Cambodia",
-    description:
-      "Developed and maintained an Online Management System for Materials and Technical Equipment in the Computer Lab, and provided technical support for ICT service office users.",
-    achievements: [ // FIXED: Was "projects" but template uses "achievements"
-      "Online Management System for Computer Lab Equipment",
-      "User Support and System Maintenance",
-    ],
-    technologies: ["Laravel", "SQLServer", "Vue 3", "TypeScript", "InertailJS", "Tailwind CSS"],
+  description:
+  "Developed and maintained an Online Management System for Materials and Technical Equipment in the Computer Lab, provided technical support for ICT service office users, and assisted other developers during new system implementations and feature updates.",
+  achievements: [
+  "Built and maintained an Online Management System for Computer Lab Equipment",
+  "Provided daily technical support and troubleshooting for users, including system usage, hardware, and software issues",
+  "Assisted developers during system rollout and new feature updates",
+  "Performed system maintenance and basic issue debugging",
+],
+
+    technologies: ["Laravel", "SQLServer", "Vue 3", "TypeScript", "InertailJS", "Tailwind CSS", "Github",],
   },
 ];
 </script>

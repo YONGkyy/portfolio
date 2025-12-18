@@ -5,7 +5,7 @@ const footerLinks = [
   { text: "Home", id: "banner" },
   { text: "About", id: "aboutme" },
   { text: "Projects", id: "projects" },
-  { text: "Contact", id: "contact" },
+  // { text: "Contact", id: "contact" },
 ];
 
 const socialLinks = [
@@ -17,7 +17,7 @@ const socialLinks = [
   },
   {
     icon: "fab fa-facebook-f",
-    url: "https://www.facebook.com/yong.kawaii",
+    url: "https://www.facebook.com/hea.yong.24",
     label: "Facebook",
   },
   {

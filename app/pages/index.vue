@@ -77,7 +77,7 @@ onMounted(() => {
 
     <!-- Main Content -->
     <div class="relative z-10">
-      <Banner profiles="/images/profileAi(1).png" />
+      <Banner />
 
       <Aboutme profile-image="/images/sadness.png" />
 
