@@ -138,7 +138,7 @@ onUnmounted(() => {
     >
       <!-- Left Text -->
       <div
-        class="hero-content animate-fade-in-up w-full lg:w-1/2 lg:pt-0"
+        class="hero-content text-center lg:text-left animate-fade-in-up w-full lg:w-1/2 pt-24 lg:pt-0"
         :style="{
           transform: `translateY(${parallaxOffset}px)`,
           opacity: Math.max(0, 1 - parallaxOffset / 500),
